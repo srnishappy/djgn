@@ -14,9 +14,17 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+
 from django.contrib import admin
 from django.urls import path
+from . import views
+from .todoListView import TodoListView
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path("", views.index, name="index"),
+    path("about", views.about, name="about"),
+    path("search/<str:keyword>/<int:page>", views.search, name="search"),
+    path("map", views.map, name="map"),
+    path("admin/", admin.site.urls),
+    path("api/todos", TodoListView.as_view(), name="todos"),
 ]
